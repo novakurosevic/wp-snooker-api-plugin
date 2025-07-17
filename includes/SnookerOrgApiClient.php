@@ -63,7 +63,7 @@ class SnookerOrgApiClient
 				'X-Requested-By' => $api_key,
 				'Accept' => 'application/json',
 			],
-			'timeout' => 10,
+			'timeout' => 30,
 		]);
 
 		$errors = $this->check_response_code_for_errors($response);

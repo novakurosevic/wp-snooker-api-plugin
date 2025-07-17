@@ -66,7 +66,7 @@ To resolve:
 3. **Clear the plugin cache** using the button in the plugin's admin page.
 4. **Refresh the frontend page** where the plugin shortcode is used.
 
-➡️ You can refer to the screenshot (`screenshot-4.png`) showing what this issue typically looks like.
+➡️ You can refer to the screenshot (`screenshot-5.png`) showing what this issue typically looks like.
 
 ---
 
@@ -75,9 +75,8 @@ To resolve:
 1. `screenshot-1.png` – Admin Settings Page
 2. `screenshot-2.png` – Frontend: Previous Matches Tab
 3. `screenshot-3.png` – Frontend: Current Matches Tab
-4. `screenshot-4.png` – Example of error caused by invalid or missing `X-Requested-By` header
-
-Place all screenshots in the `assets/` directory of the plugin when submitting to WordPress.org.
+4. `screenshot-4.png` – Frontend: Coming Matches Tab
+5. `screenshot-5.png` – Example of error caused by invalid or missing `X-Requested-By` header
 
 ---
 
