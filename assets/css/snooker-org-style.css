@@ -1,0 +1,241 @@
+.snooker-org-plugin-wrapper {
+    max-width: 100%;
+    width: 100%; /* fluid width */
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+/*
+ *  Tabs
+ */
+.snooker-org-tabs{
+    text-align: center;
+}
+
+/* Buttons in one row */
+.snooker-org-tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap; /* On smaller screen goes to the next row */
+}
+
+.snooker-org-tab-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 150px;
+    transition: height 0.4s ease;
+}
+
+/* All tab contents are stacked in the same position and hidden by default */
+.snooker-org-tab-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Active tab is visible and centered */
+.snooker-org-tab-content.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    z-index: 2;
+}
+
+/* Tab that's exiting slides out to the left */
+.snooker-org-tab-content.exit-left {
+    transform: translateX(-100%);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Tab that's entering slides in from the right */
+.snooker-org-tab-content.enter-right {
+    transform: translateX(0);
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Buttons */
+.snooker-org-tab-btn {
+    padding: 8px 12px;
+    margin: 4px 6px;
+    font-size: 14px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    flex: 1 1 auto;
+    min-width: 80px;
+    max-width: 150px;
+}
+
+.snooker-org-tab-btn:hover {
+    background-color: #ddd;
+}
+
+.snooker-org-tab-btn.active {
+    background-color: #444;
+    color: white;
+    border-color: #222;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 480px) {
+    .snooker-org-tab-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .snooker-org-tab-btn {
+        max-width: 100%;
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .snooker-match {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .snooker-match .player,
+    .snooker-match .score {
+        min-width: auto;
+        width: 100%;
+        white-space: normal;
+        justify-content: flex-start;
+    }
+
+    .snooker-match .score {
+        text-align: left;
+        margin: 6px 0;
+    }
+}
+
+.snooker-org-error {
+    color: #a00;
+    background: #fee;
+    border: 1px solid #a00;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/*
+ *  Table with data content.
+ */
+
+/* Wrapper for all tournaments */
+.snooker-tournaments-wrapper {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+}
+
+/* Spacing between tournaments */
+.snooker-tournament + .snooker-tournament {
+    margin-top: 40px;
+}
+
+/* Style for individual tournament */
+.snooker-tournament {
+    background: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    padding: 10px 20px 20px 20px;
+}
+
+/* Tournament title */
+.tournament-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #222;
+}
+
+/* Match */
+.snooker-match {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    flex-wrap: wrap; /* Go to next line if there is no space */
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.match-note {
+    color: #c00;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Player */
+.snooker-match .player {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 42%;
+    flex: 1 1 auto;
+    white-space: nowrap;
+
+    justify-content: center;
+}
+
+.winner {
+    font-weight: bold;
+}
+
+/* Flag */
+.snooker-match .player img {
+    width: 24px;
+    height: 16px;
+    object-fit: contain;
+    border-radius: 2px;
+    display: block;
+}
+
+/* Score */
+.snooker-match .score {
+    font-size: 18px;
+    max-width: 16%;
+    text-align: center;
+    flex: 0 0 auto;
+}
+
+.powered-by-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.powered-by {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.2;
+}
+
+.powered-by img {
+    height: 30px;
+    display: block;
+    vertical-align: middle;
+}
+
+.no-matches{
+    padding: 0 10%;
+}
