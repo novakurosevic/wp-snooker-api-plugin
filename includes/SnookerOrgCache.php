@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the Snooker API Plugin, distributed under the terms of the
+ * This file is part of the Snooker Org API plugin, distributed under the terms of the
  * GNU General Public License v2 or later. For full license text, see the LICENSE.md file.
  *
  * @package    SnookerApiPlugin

@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the Snooker API Plugin, distributed under the terms of the
+ * This file is part of the Snooker Org API plugin, distributed under the terms of the
  * GNU General Public License v2 or later. For full license text, see the LICENSE.md file.
  *
  * @package    SnookerApiPlugin
@@ -321,14 +321,16 @@ class SnookerOrgApiClient
 						$output_html.=
 							'<div class="snooker-match">
 						<div class="player">
-							<img src="' . $this->getFlagFromPlayerData($one_match['player_1_country'] ) .  '" alt="" />
+							<img src="' . $this->getFlagFromPlayerData($one_match['player_1_country'] )  // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+						 . '" alt="" /> 
 							<span ' . $this->isPlayerWinnerStyle($one_match['player_1_winner']) . '>' . $one_match['player_1_name'] . '</span>
 						</div>
 						<div class="score">' . $one_match['player_1_score'] . ' (' . $one_match['maximum_number_of_frames'] . ') '
 							. $one_match['player_2_score'] . '</div>
 						<div class="player">
 							<span ' . $this->isPlayerWinnerStyle($one_match['player_2_winner']) . '>' . $one_match['player_2_name'] . '</span>
-							<img src="' . $this->getFlagFromPlayerData($one_match['player_2_country'] ) .  '" alt="" />
+							<img src="' . $this->getFlagFromPlayerData($one_match['player_2_country'] )  // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+							. '" alt="" />
 						</div>
 					</div>';
 
@@ -359,7 +361,7 @@ class SnookerOrgApiClient
 		$last_few_days_html = $this->generateHtmlOutputForLastFewDays();
 		$snooker_org_logo = $this->showSnookerOrgLogoHtml();
 
-		return <<<HTML
+		return '
 				<div class="snooker-org-tabs">
 				    <div class="snooker-org-tab-buttons">
 				        <button class="snooker-org-tab-btn active" data-target="previous">Previous</button>
@@ -368,52 +370,22 @@ class SnookerOrgApiClient
 				    </div>
 				    <div class="snooker-org-tab-wrapper">
 				        <div class="snooker-org-tab-content active" id="snooker_org_previous_tab">
-				            {$last_few_days_html}
+				            ' . $last_few_days_html . '
 				        </div>
 				        <div class="snooker-org-tab-content" id="snooker_org_current_tab">
 				            <p>Ongoing Matches</p>
 				            <div class="snooker-tournaments-wrapper"></div>
-				            {$snooker_org_logo}
+				            ' . $snooker_org_logo . '
 				        </div>
 				        <div class="snooker-org-tab-content" id="snooker_org_upcoming_tab">
 				            <p>Upcoming Matches</p>
 				            <div class="snooker-tournaments-wrapper"></div>
-				            {$snooker_org_logo}
+				             ' . $snooker_org_logo . '
 				        </div>
 				    </div>
 				</div>
-				HTML;
+				';
 
-
-		return <<<HTML
-				<div class="snooker-org-tabs">
-				    <div class="snooker-org-tab-buttons">
-				        <button class="snooker-org-tab-btn active" data-target="previous">Previous</button>
-				        <button class="snooker-org-tab-btn" data-target="current">Current</button>
-				        <button class="snooker-org-tab-btn" data-target="upcoming">Coming</button>
-				    </div>
-				    <div class="snooker-org-tab-wrapper">
-				        <div class="snooker-org-tab-content active" id="snooker_org_previous_tab">
-				            <p>Finished Matches</p>
-				            <div class="snooker-tournaments-wrapper">
-				                {$last_few_days_html}
-				            </div>
-				        </div>
-				        <div class="snooker-org-tab-content" id="snooker_org_current_tab">
-				            <p>Ongoing Matches</p>
-				            <div class="snooker-tournaments-wrapper">
-				                {$ongoing_matches_html}
-				            </div>
-				        </div>
-				        <div class="snooker-org-tab-content" id="snooker_org_upcoming_tab">
-				            <p>Upcoming Matches</p>
-				            <div class="snooker-tournaments-wrapper">
-				                {$upcoming_matches_html}
-				            </div>
-				        </div>
-				    </div>
-				</div>
-				HTML;
 	}
 
 
@@ -537,7 +509,7 @@ class SnookerOrgApiClient
 	}
 
 	protected function getCurrentYear(): int {
-		return (int) date('Y');
+		return (int) current_time('Y');
 	}
 
 	/**
@@ -631,7 +603,8 @@ class SnookerOrgApiClient
 					<div class="powered-by">
 						<strong>Powered by:</strong>
 						<a href="https://www.snooker.org/" target="_blank">
-						<img src="' . $logo_url . '" alt="Snooker.org Logo"></a>
+						<img src="' . $logo_url // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+		                            . '" alt="Snooker.org Logo"></a>
 					</div>
 				</div>';
 

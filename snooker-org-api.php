@@ -1,10 +1,11 @@
 <?php
 /*
-Plugin Name: Snooker API Plugin
+Plugin Name: Snooker Org API
 Description: Fetch data from snooker.org API and cache it.
 Version: 1.0
 Author: Novak Urošević
 Author URI: https://www.linkedin.com/in/novak-urosevic/
+Text Domain: snooker-org-api
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -21,12 +22,12 @@ require_once plugin_dir_path(__FILE__) . 'includes/AjaxHandlers.php';
 add_filter('cron_schedules', function ($schedules) {
 	$schedules['every_10_minutes'] = [
 		'interval' => 10 * 60,
-		'display'  => __('Every 10 Minutes'),
+		'display'  => __('Every 10 Minutes', 'snooker-org-api'),
 	];
 
 	$schedules['weekly'] = [
 		'interval' => 7 * 24 * 60 * 60,
-		'display'  => __('Once Weekly'),
+		'display'  => __('Once Weekly', 'snooker-org-api'),
 	];
 
 	return $schedules;
@@ -42,8 +43,11 @@ add_action('snooker_org_cron_event_10_minutes', [ 'SnookerOrgApiClient', 'cron_e
 
 // Add styling and JS
 function snooker_enqueue_assets() {
-	wp_enqueue_style('snooker-style', plugin_dir_url( __FILE__ ) . 'assets/css/snooker-org-style.css' );
-	wp_enqueue_script('snooker-script', plugin_dir_url( __FILE__ ) . 'assets/js/snooker-org.js', [], false, true);
+	$plugin_data = get_file_data(__FILE__, ['Version' => 'Version'], false);
+	$version = $plugin_data['Version'];
+
+	wp_enqueue_style('snooker-style', plugin_dir_url( __FILE__ ) . 'assets/css/snooker-org-style.css', [], $version );
+	wp_enqueue_script('snooker-script', plugin_dir_url( __FILE__ ) . 'assets/js/snooker-org.js', [], $version, true);
 
 	// Adding AJAX URL-a i nonce-a
 	wp_localize_script('snooker-script', 'snooker_ajax_object', [
@@ -60,7 +64,7 @@ add_action('snooker_cron_10min_event', function () {
 		$snooker_org_api_client = new SnookerOrgApiClient();
 		$snooker_org_api_client->cron_event_10_minutes();
 	} catch (Exception $e) {
-		@error_log('[Snooker 10 Minutes Cron Error] ' . $e->getMessage());
+		snooker_log_error('[Snooker 10 Minutes Cron Error] ' . $e->getMessage());
 	}
 });
 
@@ -70,7 +74,7 @@ add_action('snooker_weekly_cron_event', function () {
 		$snooker_org_api_client = new SnookerOrgApiClient();
 		$snooker_org_api_client->cron_event_weekly();
 	} catch (Exception $e) {
-		@error_log('[Snooker Weekly Cron Error] ' . $e->getMessage());
+		snooker_log_error('[Snooker Weekly Cron Error] ' . $e->getMessage());
 	}
 
 });
@@ -123,5 +127,12 @@ function snooker_org_plugin_shortcode($atts = [], $content = null) {
 	set_transient($cache_key, $output_data, 10 * MINUTE_IN_SECONDS);
 
 	return $output_data;
+}
+
+function snooker_log_error($message) {
+	if ( defined('WP_DEBUG') && WP_DEBUG ) {
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		error_log($message);
+	}
 }
 

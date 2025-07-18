@@ -1,9 +1,8 @@
-=== Snooker API Plugin ===
+=== Snooker Org API ===
 Contributors: novakurosevic
 Tags: snooker, sports, api, ajax, cache
-Requires at least: 5.0
-Tested up to: 6.3
 Stable tag: 1.0
+Tested up to: 6.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +10,7 @@ Fetch data from snooker.org API and cache it for fast display of snooker match r
 
 == Description ==
 
-Snooker API Plugin fetches snooker match data from the snooker.org API and caches it to improve performance.
+Snooker Org API fetches snooker match data from the snooker.org API and caches it to improve performance.
 
 It displays previous, current, and upcoming matches using tabs with AJAX loading for a smooth user experience.
 
@@ -39,7 +38,7 @@ Enter this value in the plugin settings.
 
 6. After installation, click **Activate Plugin**.
 
-7. Go to the plugin settings page (found under **Settings > Snooker API Plugin**) and enter the Header Value (X-Requested-By) you obtained by emailing **`webmaster@snooker.org`**.
+7. Go to the plugin settings page (found under **Settings > Snooker Org API**) and enter the Header Value (X-Requested-By) you obtained by emailing **`webmaster@snooker.org`**.
 
 8. To display the snooker matches on your site, add the shortcode `[snooker_org_plugin]` into any post, page, or text widget.
 
