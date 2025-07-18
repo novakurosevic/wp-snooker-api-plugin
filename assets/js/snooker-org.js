@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     const intervalSeconds = 10;
 
-    console.log('DOM fully loaded');
-
     if (buttons.length === 0 || contents.length === 0) {
         console.warn('Tab buttons or contents not found, tabs will not work.');
     } else {
@@ -112,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.text())
                 .then(html => {
                     target.innerHTML = html;
-                    console.log(`Tab ${tabIndex} content loaded via AJAX at ${new Date().toLocaleTimeString()}.`);
 
                     setFixedWrapperHeight();
                 })
